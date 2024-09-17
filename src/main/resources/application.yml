@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: openclassroom
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/openclassroom
+    username: postgres
+    password: supersecureyeah
+security:
+  jwt:
+    secret-key: OqTIf+UoR+WTayb2F2Ooh6bf+zeTGLA5T6nn+M6RpGRtcRyvrF6OVVg8NvgK1LWRIQ+uPtMjYWNH99umX2Sw/Q==
+    expiration-time: 3600000
