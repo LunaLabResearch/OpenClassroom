@@ -1,5 +1,6 @@
 package sbs.luna.openclassroom.classes.entity
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import jakarta.persistence.*
 
 @Entity
@@ -9,6 +10,7 @@ class Subject(
     val name: String,
 
     @OneToMany(mappedBy = "subject", cascade = [(CascadeType.DETACH)])
+    @JsonBackReference
     val classes: List<Class> = listOf(),
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

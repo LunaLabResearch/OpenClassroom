@@ -1,5 +1,6 @@
 package sbs.luna.openclassroom.classes.entity
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import jakarta.persistence.*
 import java.time.LocalDate
 
@@ -11,6 +12,7 @@ class Class(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id")
+    @JsonManagedReference
     val subject: Subject? = null,
 
     @Column(name = "start_date")

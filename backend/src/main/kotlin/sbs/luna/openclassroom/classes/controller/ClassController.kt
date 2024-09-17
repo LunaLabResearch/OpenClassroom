@@ -1,5 +1,6 @@
 package sbs.luna.openclassroom.classes.controller
 
+import org.springframework.web.bind.annotation.GetMapping
 import sbs.luna.openclassroom.classes.dto.NewClassDTO
 import sbs.luna.openclassroom.classes.entity.Class
 import sbs.luna.openclassroom.classes.repository.ClassRepository
@@ -16,6 +17,9 @@ class ClassController(
     private val classRepository: ClassRepository,
     private val subjectRepository: SubjectRepository
 ) {
+    @GetMapping("/")
+    fun getClasses() = classRepository.findAll().toList()
+
     @PostMapping("/")
     fun createClass(@RequestBody classToSave: NewClassDTO): Class {
         val subject = classToSave.subjectId?.let { subjectRepository.findById(it) }
