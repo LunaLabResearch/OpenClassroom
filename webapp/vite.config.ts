@@ -1,20 +1,9 @@
-import { defineConfig } from 'vite';
-import solidPlugin from 'vite-plugin-solid';
-// import devtools from 'solid-devtools/vite';
+import { sveltekit } from '@sveltejs/kit/vite';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-  plugins: [
-    /* 
-    Uncomment the following line to enable solid-devtools.
-    For more info see https://github.com/thetarnav/solid-devtools/tree/main/packages/extension#readme
-    */
-    // devtools(),
-    solidPlugin(),
-  ],
-  server: {
-    port: 3000,
-  },
-  build: {
-    target: 'esnext',
-  },
+	plugins: [sveltekit()],
+	test: {
+		include: ['src/**/*.{test,spec}.{js,ts}']
+	}
 });

@@ -1,34 +1,38 @@
-## Usage
+# create-svelte
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
 
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+## Creating a project
+
+If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-$ npm install # or pnpm install or yarn install
+# create a new project in the current directory
+npm create svelte@latest
+
+# create a new project in my-app
+npm create svelte@latest my-app
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+## Developing
 
-## Available Scripts
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
-In the project directory, you can run:
+```bash
+npm run dev
 
-### `npm run dev` or `npm start`
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Building
 
-The page will reload if you make edits.<br>
+To create a production version of your app:
 
-### `npm run build`
+```bash
+npm run build
+```
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+You can preview the production build with `npm run preview`.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

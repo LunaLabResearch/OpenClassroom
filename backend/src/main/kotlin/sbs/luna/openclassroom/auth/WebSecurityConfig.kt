@@ -35,7 +35,9 @@ class WebSecurityConfig(
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain =
-        http.csrf { csrf -> csrf.disable() }
+        http
+            .csrf { csrf -> csrf.disable() }
+            .cors {}
             .authorizeHttpRequests { auth ->
                 auth.requestMatchers("/auth/**").permitAll()
                     .requestMatchers("/subjects/**").hasAnyAuthority("ADMIN", "TEACHER")
@@ -53,9 +55,10 @@ class WebSecurityConfig(
         UrlBasedCorsConfigurationSource().apply {
             registerCorsConfiguration("/**", CorsConfiguration().apply {
 //            TODO: DO NOT FORGET TO CHANGE THIS WHEN PREPARING FOR PROD!!!
-                allowedOrigins = listOf("*")
-                allowedMethods = listOf("GET", "POST", "PUT", "DELETE")
-                allowedHeaders = listOf("Authorization", "Content-Type")
+                allowedOrigins = listOf("http://localhost:5173/")
+                allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                allowedHeaders = listOf("*")
+                allowCredentials = true
             })
         }
 }
