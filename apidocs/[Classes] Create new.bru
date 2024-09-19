@@ -1,0 +1,23 @@
+meta {
+  name: [Classes] Create new
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{host}}/classes/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_teacher}}
+}
+
+body:json {
+  {
+      "name": "Physics 101",
+      "subjectId": 1,
+      "description": "Here we will be studying physics"
+  }
+}

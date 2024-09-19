@@ -1,0 +1,15 @@
+meta {
+  name: [Subjects] Get all
+  type: http
+  seq: 6
+}
+
+get {
+  url: {{host}}/subjects/
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_teacher}}
+}

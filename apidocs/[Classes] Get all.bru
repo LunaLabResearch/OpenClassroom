@@ -1,0 +1,15 @@
+meta {
+  name: [Classes] Get all
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{host}}/classes/
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token_teacher}}
+}
