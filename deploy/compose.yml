@@ -1,20 +1,56 @@
+x-logging: &logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
-  db:
-    image: postgres:14-alpine
-    restart: always
+  postgres:
+    image: postgres:${POSTGRES_VERSION}
+    restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: supersecureyeah
-      POSTGRES_DB: openclassroom
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
+    networks:
+      - dbnetwork
 
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
+  keycloak:
+    image: quay.io/keycloak/keycloak:${KC_VERSION}
+    command: ["start-dev", "--import-realm"]
+    restart: unless-stopped
+    environment:
+      KC_DB: postgres
+      KC_DB_USERNAME: keycloak_user
+      KC_DB_PASSWORD: keycloak_password
+      KC_DB_URL: "jdbc:postgresql://postgres:5432/keycloak"
+      KC_METRICS_ENABLED: true
+      KC_LOG_LEVEL: ${KC_LOG_LEVEL}
+      KC_REALM_NAME: ${KC_REALM_NAME}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    ports:
+      - ${KC_PORT}:8080
+    volumes:
+      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json:ro
+    logging: *logging
+    depends_on:
+      - postgres
+    networks:
+      - dbnetwork
+
+  # TODO: For dev use only, move it to a separate compose file later
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8082:8080
+
+networks:
+  dbnetwork:
 
 volumes:
-  pgdata:
+  postgres_data:
