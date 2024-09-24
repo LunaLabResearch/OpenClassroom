@@ -1,0 +1,10 @@
+{
+  "realm": "OpenClassroom",
+  "auth-server-url": "http://localhost:8081/",
+  "ssl-required": "external",
+  "resource": "openclassroom-web",
+  "credentials": {
+    "secret": "uGXHp5AvqcDnp4ALpV1tlX5K6jvVayrj"
+  },
+  "confidential-port": 0
+}

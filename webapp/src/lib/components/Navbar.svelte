@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { PUBLIC_API_BASE_URL } from '$env/static/public';
 	import { createDialog, melt } from '@melt-ui/svelte';
+	import { signIn } from '@auth/sveltekit/client';
 
 	const {
 		elements: { trigger, overlay, content, title, description, close, portalled },
@@ -34,7 +35,7 @@
 </script>
 
 <nav class="header">
-	<button use:melt={$trigger} class="trigger">New class</button>
+	<!-- <button use:melt={$trigger} class="trigger">New class</button>
 	{#if $open}
 		<div use:melt={$portalled}>
 			<div use:melt={$overlay} class="overlay" />
@@ -65,8 +66,8 @@
 				<button use:melt={$close} aria-label="close" class="close"> X </button>
 			</div>
 		</div>
-	{/if}
-	<a href="/login">Login</a>
+	{/if} -->
+	<button on:click={() => signIn('keycloak')}> Sign In </button>
 </nav>
 
 <style>

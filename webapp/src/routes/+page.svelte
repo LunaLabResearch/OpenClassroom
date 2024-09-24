@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { PUBLIC_API_BASE_URL } from '$env/static/public';
 	import { onMount } from 'svelte';
+	import type { LayoutServerData } from './$types';
+
+	let { data } = $props<{ data: LayoutServerData }>();
 
 	let classes: string[] = $state([]);
 
@@ -16,7 +19,7 @@
 	onMount(() => getClasses());
 </script>
 
-<button
+<!-- <button
 	onclick={async () => {
 		const res = await fetch(`${PUBLIC_API_BASE_URL}/subjects/`, {
 			headers: {
@@ -30,4 +33,6 @@
 
 {#each classes as classroom}
 	<p>{JSON.stringify(classroom)}</p>
-{/each}
+{/each} -->
+
+{JSON.stringify(data)}
